@@ -13,12 +13,13 @@
      }, (accessToken, refreshToken, profile, done) => {
          User.findOne({
              googleId: profile.id
-         }).then((user) => {
+         }).then(user => {
              if (!user) {
                  new User({
                      googleId: profile.id
-                 }).save();
+                 }).save().then(newUser => done(null, newUser))
              }
+             done(null, user)
          })
 
      })
