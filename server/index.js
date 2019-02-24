@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 
+// models
+require('./models/User');
+
 // services
 require('./services/passport');
 
-// models
-require('./models/User');
 
 // setup
 mongoose.connect(keys.mongoURI, {
