@@ -25,13 +25,16 @@ app.use(cookieSession({
     keys: [keys.cookieKey]
 }))
 app.use(passport.initialize());
+
+// tell passport to pull the id from the session
 app.use(passport.session())
 
 // routes
 
-// auth
+// setup auth
 require('./routes/auth')(app)
 
 
 const PORT = process.env.PORT || 5000;
+console.log(`Started server on port: ${PORT}`)
 app.listen(PORT);
