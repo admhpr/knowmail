@@ -1,7 +1,7 @@
  const passport = require('passport');
  const GoogleStrategy = require('passport-google-oauth20').Strategy;
  const mongoose = require('mongoose');
- const keys = require('../config/keys');
+
 
  const User = mongoose.model('users');
 
@@ -24,19 +24,19 @@
              googleId: profile.id
          }).then(user => {
              if (!user) {
-                 PassportHelpers().createNewUser()
+                 PassportHelpers(done).createNewUser(profile.id)
              }
              done(null, user)
          })
      })
  );
 
- function PassportHelpers() {
+ function PassportHelpers(done) {
      return {
          strategyConfig: {
              google: {
-                 clientID: keys.googleClientID,
-                 clientSecret: keys.googleClientSecret,
+                 clientID: process.env.GOOGLE_CLIENT_ID,
+                 clientSecret: process.env.GOOGLE_CLIENT_SECRET,
                  callbackURL: '/auth/google/callback'
              }
 
@@ -46,10 +46,10 @@
                  return
              }
              new User({
-                     googleId
-                 })
-                 .save()
-                 .then(newUser => done(null, newUser))
+                 googleId
+             }).save().then((newUser) => {
+                 done(null, newUser)
+             })
          }
      }
  }
