@@ -19,15 +19,16 @@
 
 
  passport.use(
-     new GoogleStrategy(PassportHelpers().strategyConfig['google'], (accessToken, refreshToken, profile, done) => {
-         User.findOne({
+     new GoogleStrategy(PassportHelpers().strategyConfig['google'], async (accessToken, refreshToken, profile, done) => {
+         const user = await User.findOne({
              googleId: profile.id
-         }).then(user => {
-             if (!user) {
-                 PassportHelpers(done).createNewUser(profile.id)
-             }
-             done(null, user)
          })
+
+         if (!user) {
+             PassportHelpers(done).createNewUser(profile.id)
+         }
+         done(null, user)
+
      })
  );
 
@@ -42,15 +43,16 @@
              }
 
          },
-         createNewUser: (googleId = null) => {
+         createNewUser: async (googleId = null) => {
              if (!googleId) {
                  return
              }
-             new User({
+             const newUser = await new User({
                  googleId
-             }).save().then((newUser) => {
-                 done(null, newUser)
-             })
+             }).save()
+
+             done(null, newUser)
+
          }
      }
  }
