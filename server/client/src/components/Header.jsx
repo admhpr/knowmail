@@ -6,7 +6,7 @@ class Header extends Component {
     const { auth } = this.props;
     switch (auth) {
       case null:
-        return "Loading";
+        return "Loading...";
       case false:
         return (
           <li>
