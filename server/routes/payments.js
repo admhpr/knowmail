@@ -13,6 +13,6 @@ module.exports = app => {
             source: body.id,
         })
 
-        console.log(charge)
+
     })
 }
