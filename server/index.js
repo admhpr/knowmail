@@ -39,6 +39,7 @@ app.use(passport.session())
 require('./routes/auth')(app)
 require('./routes/payments')(app)
 
+// send index.html if no route is found
 if (process.env.NODE_ENV === "production") {
     const path = require('path');
     app.get('*', (req, res) => {
