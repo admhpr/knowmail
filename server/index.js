@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 require('dotenv').config()
 // models
 require('./models/User');
+require('./models/Survey');
 
 // services
 require('./services/passport');
