@@ -39,6 +39,7 @@ app.use(passport.session())
 // setup auth
 require('./routes/auth')(app)
 require('./routes/payments')(app)
+require('./routes/survey')(app)
 
 
 
