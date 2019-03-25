@@ -13,6 +13,13 @@ class Mailer extends helper.Mail {
         this.body = new helper.Content('text/html', content);
         this.recipients = this.formatAddresses(recipients)
     }
+
+
+    formatAddresses(recipients) {
+        return recipients.map(({
+            email
+        }) => new helper.Email(email))
+    }
 }
 
 module.exports = Mailer;
