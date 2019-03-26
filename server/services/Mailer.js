@@ -26,12 +26,19 @@ class Mailer extends helper.Mail {
     }
 
     addClickTracking() {
-
         const trackingSettings = new helper.TrackingSettings();
         const clickTracking = new helper.ClickTracking(true, true);
-
         trackingSettings.setClickTracking(clickTracking);
         this.addTrackingSettings(trackingSettings);
+    }
+
+    addRecipients() {
+        const personalise = new helper.Personalization();
+        this.recipients.forEach(recipient => {
+            personalise.addTo(recipient);
+        })
+
+        this.addPersonalization(personalise);
     }
 }
 
