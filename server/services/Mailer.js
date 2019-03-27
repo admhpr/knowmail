@@ -8,6 +8,7 @@ class Mailer extends helper.Mail {
     }, content) {
         super();
 
+        this.sendGridApi = sendgrid(process.env.SENDGRID_KEY)
         this.from_email = new helper.Email('no-reply@knowmail.com');
         this.subject = subject;
         this.body = new helper.Content('text/html', content);
@@ -39,6 +40,17 @@ class Mailer extends helper.Mail {
         })
 
         this.addPersonalization(personalise);
+    }
+
+    async send() {
+        const request = this.sendGridApi.emptyRequest({
+            method: POST,
+            path: 'v3/mail/send',
+            body: this.toJSON(),
+        })
+
+        const response = this.sendGridApi.API(request);
+        return response;
     }
 }
 
