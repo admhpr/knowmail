@@ -9,7 +9,7 @@ class Mailer {
         this.to = recipients.map(({
             email
         }) => email);
-        this.from = 'no-reply@emaily.com';
+        this.from = 'no-reply@knowmail.com';
         this.subject = subject;
         this.html = content;
     }
