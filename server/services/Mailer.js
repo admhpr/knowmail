@@ -1,55 +1,26 @@
-const sendgrid = require('sendgrid');
-const helper = sendgrid.mail;
+const sgMail = require('@sendgrid/mail');
 
-class Mailer extends helper.Mail {
+class Mailer {
     constructor({
         subject,
         recipients
     }, content) {
-        super();
-
-        this.sendGridApi = sendgrid(process.env.SENDGRID_KEY)
-        this.from_email = new helper.Email('no-reply@knowmail.com');
-        this.subject = subject;
-        this.body = new helper.Content('text/html', content);
-        this.recipients = this.formatAddresses(recipients);
-
-        this.addContent(this.body);
-        this.addClickTracking();
-        this.addRecipients();
-    }
-
-
-    formatAddresses(recipients) {
-        return recipients.map(({
+        sgMail.setApiKey(process.env.SENDGRID_KEY);
+        this.to = recipients.map(({
             email
-        }) => new helper.Email(email))
-    }
-
-    addClickTracking() {
-        const trackingSettings = new helper.TrackingSettings();
-        const clickTracking = new helper.ClickTracking(true, true);
-        trackingSettings.setClickTracking(clickTracking);
-        this.addTrackingSettings(trackingSettings);
-    }
-
-    addRecipients() {
-        const personalise = new helper.Personalization();
-        this.recipients.forEach(recipient => {
-            personalise.addTo(recipient);
-        })
-
-        this.addPersonalization(personalise);
+        }) => email);
+        this.from = 'no-reply@emaily.com';
+        this.subject = subject;
+        this.html = content;
     }
 
     async send() {
-        const request = this.sendGridApi.emptyRequest({
-            method: POST,
-            path: 'v3/mail/send',
-            body: this.toJSON(),
-        })
-
-        const response = this.sendGridApi.API(request);
+        let response;
+        try {
+            response = await sgMail.send(this, true);
+        } catch (error) {
+            console.error(error);
+        }
         return response;
     }
 }

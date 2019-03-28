@@ -47,7 +47,6 @@ require('./routes/survey')(app)
 
 // send index.html if no route is found
 if (process.env.NODE_ENV === "production") {
-    console.log('here')
     const path = require('path');
     app.use(express.static(path.join(__dirname, 'client', 'build')));
     app.get('*', (req, res) => {

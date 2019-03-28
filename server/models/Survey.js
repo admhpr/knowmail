@@ -16,7 +16,7 @@ const survey = new Schema({
         type: Number,
         default: 0
     },
-    dateSent: DataCue,
+    dateSent: Date,
     lastResponded: Date,
     _user: {
         type: Schema.Types.ObjectId,
