@@ -1,5 +1,5 @@
-module.exports = (survey) => {
-    return `
+module.exports = survey => {
+  return `
         <html>
         <body>
             <div style="text-align: center">
@@ -8,14 +8,16 @@ module.exports = (survey) => {
                 <p>${survey.body}</p>
                 
                 <div>
-                    <a href="http://localhost:3000">Yes</a>
+                <a href="http://localhost:3000">Yes</a>
                 </div>
                 <div>
+                
+                    
                     <a href="http://localhost:3000">No
                     </a>
                 </div>
             </div>
         </body>
         </html>
-    `
-}
+    `;
+};
