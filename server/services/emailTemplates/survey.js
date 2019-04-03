@@ -11,8 +11,6 @@ module.exports = survey => {
                 <a href="http://localhost:3000">Yes</a>
                 </div>
                 <div>
-                
-                    
                     <a href="http://localhost:3000">No
                     </a>
                 </div>
