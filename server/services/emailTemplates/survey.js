@@ -6,7 +6,7 @@ module.exports = survey => {
                 <h3> We'd like your input! </h3>
                 <p>Please answer the following</p>
                 <p>${survey.body}</p>
-                
+                <hr/>
                 <div>
                 <a href="http://localhost:3000">Yes</a>
                 </div>
