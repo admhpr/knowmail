@@ -7,7 +7,7 @@ const surveyTemplate = require('../services/emailTemplates/survey')
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-    app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
+    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
         const {
             title,
             subject,
@@ -27,6 +27,16 @@ module.exports = app => {
         })
 
         const mailer = new Mailer(survey, surveyTemplate(survey));
-        mailer.send(survey)
+
+        try {
+            await mailer.send();
+            await survey.save();
+            req.user.credits -= 1;
+            await req.user.save();
+            res.send(req.user)
+
+        } catch (err) {
+            res.status(422).send(err.message)
+        }
     })
 }
