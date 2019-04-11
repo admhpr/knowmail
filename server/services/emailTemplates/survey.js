@@ -1,3 +1,5 @@
+const getParams = require('../../utils/helper').getParams
+console.log(getParams().redirectDomain)
 module.exports = survey => {
     return `
         <html>
@@ -8,10 +10,10 @@ module.exports = survey => {
                 <p>${survey.body}</p>
                 <hr/> 
                 <div>
-                <a href="http://localhost:3000">Yes</a>
+                <a href = ${getParams().redirectDomain}> Yes </a>
                 </div>
                 <div>
-                    <a href="http://localhost:3000">No
+                    <a href=${getParams().redirectDomain}> No
                     </a>
                 </div>
             </div>
