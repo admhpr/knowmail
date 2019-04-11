@@ -10,10 +10,10 @@ module.exports = survey => {
                 <p>${survey.body}</p>
                 <hr/> 
                 <div>
-                <a href = ${getParams().redirectDomain}> Yes </a>
+                <a href = ${getParams().redirectDomain}/api/surveys/thanks> Yes </a>
                 </div>
                 <div>
-                    <a href=${getParams().redirectDomain}> No
+                    <a href=${getParams().redirectDomain}/api/surveys/thanks> No
                     </a>
                 </div>
             </div>
