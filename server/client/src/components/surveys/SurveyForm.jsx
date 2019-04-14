@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { reduxForm } from "redux-form";
 
-export default class SurveyForm extends Component {
+class SurveyForm extends Component {
   render() {
     return <div>SurveyForm</div>;
   }
 }
+
+export default reduxForm({ form: "surveyForm" })(SurveyForm);
