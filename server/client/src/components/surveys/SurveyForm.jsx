@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { reduxForm } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 
 class SurveyForm extends Component {
   render() {
-    return <div>SurveyForm</div>;
+    return (
+      <div>
+        <Field type="text" name="surveyTitle" component="input" />
+      </div>
+    );
   }
 }
 
