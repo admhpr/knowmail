@@ -3,7 +3,7 @@ import {
 } from '../actions/types';
 
 export default function (state = null, action) {
-    //TODO: debug
+    //TODO: log for debug purposes
     console.log(action);
     switch (action.type) {
         case FETCH_USER:
