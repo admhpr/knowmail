@@ -1,7 +1,11 @@
 import React from "react";
 
 const SurveyField = () => {
-  return <div>SurveyField</div>;
+  return (
+    <div>
+      <input />
+    </div>
+  );
 };
 
 export default SurveyField;
