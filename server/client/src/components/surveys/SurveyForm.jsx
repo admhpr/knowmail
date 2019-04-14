@@ -3,9 +3,12 @@ import { reduxForm, Field } from "redux-form";
 
 class SurveyForm extends Component {
   render() {
+    const { handleSubmit } = this.props;
     return (
       <div>
-        <Field type="text" name="surveyTitle" component="input" />
+        <form onSubmit={handleSubmit(values => console.log(values))}>
+          <Field type="text" name="surveyTitle" component="input" />
+        </form>
       </div>
     );
   }
