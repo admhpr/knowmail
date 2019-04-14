@@ -5,7 +5,7 @@ import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-const SurveryNew = () => <h2>SurveryNew</h2>;
+const SurveryNew = () => <h2>Survery New</h2>;
 
 class App extends Component {
   componentDidMount() {
