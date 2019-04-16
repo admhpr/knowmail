@@ -6,7 +6,7 @@ const renderContent = () => {
   const [showFormReview, setShowFormReview] = useState(false);
   console.log(showFormReview);
   return showFormReview ? (
-    <SurveyFormNew />
+    <SurveyFormNew onCancel={() => setShowFormReview(false)} />
   ) : (
     <SurveyForm onSubmit={() => setShowFormReview(true)} />
   );
