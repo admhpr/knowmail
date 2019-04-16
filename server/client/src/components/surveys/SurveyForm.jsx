@@ -4,13 +4,7 @@ import SurveyField from "./SurveyField";
 import { Link } from "react-router-dom";
 import { validateEmails } from "../../utils/validators";
 import _ from "lodash";
-
-const FIELDS = [
-  { label: "Survey Title", name: "title" },
-  { label: "Survey Line", name: "subject" },
-  { label: "Email Body", name: "body" },
-  { label: "Recipient List", name: "emails" }
-];
+import { FIELDS } from "./formConsts";
 class SurveyForm extends Component {
   renderFields() {
     return _.map(FIELDS, ({ label, name }) => {
