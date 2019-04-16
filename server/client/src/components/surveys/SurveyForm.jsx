@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import SurveyField from "./SurveyField";
 import { Link } from "react-router-dom";
+import { validateEmails } from "../../utils/validators";
 import _ from "lodash";
 
 const FIELDS = [
@@ -48,6 +49,8 @@ function validate(values) {
     if (!values[name]) {
       errors[name] = `You must provide a value`;
     }
+
+    errors.emails = validateEmails(values.emails || "");
   });
   return errors;
 }
