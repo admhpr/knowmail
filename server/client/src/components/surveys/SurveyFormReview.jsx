@@ -30,8 +30,6 @@ const SurveyFormReview = ({ onCancel, formValues }) => {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
-
   const {
     form: {
       surveyForm: { values }
