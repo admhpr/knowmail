@@ -12,6 +12,6 @@ export const FIELDS = [{
     },
     {
         label: "Recipient List",
-        name: "emails"
+        name: "recipients"
     }
 ];
