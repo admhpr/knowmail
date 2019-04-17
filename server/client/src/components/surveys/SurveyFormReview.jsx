@@ -2,7 +2,9 @@ import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { FIELDS } from "./formConsts";
-const SurveyFormReview = ({ onCancel, formValues }) => {
+import * as actions from "../../actions";
+
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
   const reviewFields = _.map(FIELDS, ({ name, label }) => {
     return (
       <div key={name}>
@@ -21,7 +23,10 @@ const SurveyFormReview = ({ onCancel, formValues }) => {
       >
         Back
       </button>
-      <button className="green white-text btn-flat right" onClick={onCancel}>
+      <button
+        onClick={() => submitSurvey(formValues)}
+        className="green white-text btn-flat right"
+      >
         Send Survey
         <i className="material-icons right">email</i>
       </button>
@@ -37,4 +42,7 @@ function mapStateToProps(state) {
   } = state;
   return { formValues: values };
 }
-export default connect(mapStateToProps)(SurveyFormReview);
+export default connect(
+  mapStateToProps,
+  actions
+)(SurveyFormReview);
