@@ -23,6 +23,7 @@ export const handleToken = (token) => async dispatch => {
 }
 
 export const submitSurvey = values => {
+    console.log(values)
     return {
         type: 'submit_survey'
     }
