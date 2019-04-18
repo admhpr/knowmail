@@ -9,8 +9,9 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "deploy": "npm i --prefix client && npm run build --prefix client && cross-env NODE_ENV=production npm run start"
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
+    "deploy": "npm i --prefix client && npm run build --prefix client && cross-env NODE_ENV=production npm run start",
+    "webhook": "lt -p 5000 -s jdkajsdkja"
   },
   "main": "index.js",
   "license": "MIT",
@@ -28,6 +29,7 @@
     "stripe": "^6.27.0"
   },
   "devDependencies": {
+    "localtunnel": "^1.9.1",
     "nodemon": "^1.18.10"
   }
 }
