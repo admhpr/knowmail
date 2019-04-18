@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { FIELDS } from "./formConsts";
+import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
@@ -45,4 +46,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   actions
-)(SurveyFormReview);
+)(withRouter(SurveyFormReview));
