@@ -1,5 +1,7 @@
 const _ = require('lodash');
-const Path = require('path-parser');
+const {
+    Path
+} = require('path-parser');
 const {
     URL
 } = require('url');
@@ -20,6 +22,7 @@ module.exports = app => {
         const events = _.map(req.body, event => {
             const pathname = new URL(event.url).pathname;
             const p = new Path('/api/surveys/:surveyId/:choice');
+            console.log(p.test(pathname))
 
         })
     })
