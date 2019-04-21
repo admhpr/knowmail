@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function localtunnel {
-    echo "localtunnel has started"
+    echo "localtunnel has started:"
     lt --subdomain jdkajsdkja112233902390 --port 5000
 }
 
