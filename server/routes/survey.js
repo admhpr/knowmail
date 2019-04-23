@@ -1,6 +1,10 @@
 const _ = require("lodash");
-const { Path } = require("path-parser");
-const { URL } = require("url");
+const {
+  Path
+} = require("path-parser");
+const {
+  URL
+} = require("url");
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 const requireCredits = require("../middlewares/requireCredits");
@@ -17,10 +21,16 @@ module.exports = app => {
   app.post("/api/surveys/webhooks", (req, res) => {
     const p = new Path("/api/surveys/:surveyId/:choice");
     const events = _.chain(req.body)
-      .map(({ email, url }) => {
+      .map(({
+        email,
+        url
+      }) => {
         const match = p.test(new URL(url).pathname);
         if (match) {
-          const { surveyId, choice } = match;
+          const {
+            surveyId,
+            choice
+          } = match;
           return {
             email,
             surveyId,
@@ -30,13 +40,35 @@ module.exports = app => {
       })
       .compact()
       .uniqBy("email", "id")
+      .each(event => {
+        Survey.updateOne({
+          id: surveyId,
+          recipients: {
+            $elemMatch: {
+              email: email,
+              responded: false
+            }
+          }
+        }, {
+          $inc: {
+            [choice]: 1
+          },
+          $set: {
+            'recipients.$.responded': true
+          }
+        })
+      })
       .value();
 
-    console.log(events);
     res.send({});
   });
   app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
-    const { title, subject, body, recipients } = req.body;
+    const {
+      title,
+      subject,
+      body,
+      recipients
+    } = req.body;
 
     const survey = new Survey({
       title,
