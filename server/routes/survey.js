@@ -42,7 +42,7 @@ module.exports = app => {
       .uniqBy("email", "id")
       .each(event => {
         Survey.updateOne({
-          id: surveyId,
+          _id: surveyId,
           recipients: {
             $elemMatch: {
               email: email,
@@ -56,7 +56,7 @@ module.exports = app => {
           $set: {
             'recipients.$.responded': true
           }
-        })
+        }).exec();
       })
       .value();
 
