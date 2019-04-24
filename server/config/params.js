@@ -1,3 +1,3 @@
 module.exports = {
-    redirectDomain: 'http://localhost:3000'
+    redirectDomain: 'http://localhost:5000'
 }

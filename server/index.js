@@ -21,6 +21,8 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // init app
 const app = express();
+
+
 app.use(bodyParser.json());
 
 
@@ -33,8 +35,6 @@ app.use(passport.initialize());
 
 // tell passport to pull the id from the session
 app.use(passport.session())
-
-// routes
 
 // setup auth
 require('./routes/auth')(app)
