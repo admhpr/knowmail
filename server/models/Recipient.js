@@ -7,7 +7,7 @@ const recipient = new Schema({
     email: String,
     responded: {
         type: Boolean,
-        responded: false
+        default: false
     }
 });
 
