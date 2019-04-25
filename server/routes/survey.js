@@ -14,6 +14,11 @@ const surveyTemplate = require("../services/emailTemplates/survey");
 const Survey = mongoose.model("surveys");
 
 module.exports = app => {
+  app.get('/api/surveys', (req, res) => {
+    Survey.find({
+      _user: req.user.id
+    })
+  })
   app.post("/api/surveys/webhooks", (req, res) => {
     const p = new Path("/api/surveys/:surveyId/:choice");
     _.chain(req.body)

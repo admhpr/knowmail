@@ -1,1 +1,1 @@
-Client code for `knowmail`
+Clientside code for `knowmail`
