@@ -103,7 +103,7 @@ node_modules;
 keys.js;
 ```
 
-> <google-key> and <google-secret> are replaced with real values
+> `<google-key>` and `<google-secret>` are replaced with real values
 
 Finally, we can import the keys and pass them into `GoogleStrategy()`:
 
