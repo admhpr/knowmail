@@ -4,10 +4,10 @@
 
 1. [Intro to Google OAuth](#user-content-1-google-oauth-flow)
 2. [Passport JS](#user-content-2-passport-js)
-    * [What is Passport](#user-content-21-what-is-passport)
-    * [Passport Setup](#user-content-22-passport-setup)
-    * [Enabling Google OAuth API](#user-content-23-enabling-google-oauth-api)
-    * [Securing API Keys](#user-content-24-securing-api-keys)
+   - [What is Passport](#user-content-21-what-is-passport)
+   - [Passport Setup](#user-content-22-passport-setup)
+   - [Enabling Google OAuth API](#user-content-23-enabling-google-oauth-api)
+   - [Securing API Keys](#user-content-24-securing-api-keys)
 3. [Testing OAuth](#user-content-3-testing-oauth)
 4. [Access and Refresh Tokens](#user-content-4-access-and-refresh-tokens)
 5. [Nodemon Setup](#user-content-5-nodemon-setup)
@@ -36,12 +36,13 @@ We're going to approach the OAuth problem with a library [Passport](http://passp
 
 Two libraries are needed to be installed:
 
-* **passport:** General helpers for handling auth in Express apps.
-* **passport strategy:** Helpers for authentication with one very specific method (email/pwd, Google, Facebook, etc).
+- **passport:** General helpers for handling auth in Express apps.
+- **passport strategy:** Helpers for authentication with one very specific method (email/pwd, Google, Facebook, etc).
 
 #### 2.2. Passport Setup
 
 Install several libraries (passport and a passport strategy named [passport-google-oauth20](https://github.com/jaredhanson/passport-google-oauth2)):
+
 ```
 npm install --save passport passport-google-oauth20
 ```
@@ -80,8 +81,8 @@ Configure consent screen:
 
 In the end, we got two strings:
 
-* Client ID: 900103340416-ncphrm92c4m8taktob1nm9vhj0lmspso.apps.googleusercontent.com
-* Client Secret: Z1y7Z09TkpWTMY9U1J8Qa0ji
+- Client ID: <a-google-key>
+- Client Secret: <a-google-secret>
 
 #### 2.4. Securing API Keys
 
@@ -93,20 +94,23 @@ We can create a new file `'./config/keys.js'` to store all sensitive keys.
 // ./config/keys.js
 //---------------------------------------------------------
 module.exports = {
-  googleClientID: '900103340416-ncphrm92c4m8taktob1nm9vhj0lmspso.apps.googleusercontent.com',
-  googleClientSecret: 'Z1y7Z09TkpWTMY9U1J8Qa0ji'
+  googleClientID: "<google-key>"
+  googleClientSecret: "<google-secret>"
 };
 // ./.gitignore
 //---------------------------------------------------------
-node_modules
-keys.js
+node_modules;
+keys.js;
 ```
 
+> <google-key> and <google-secret> are replaced with real values
+
 Finally, we can import the keys and pass them into `GoogleStrategy()`:
+
 ```javascript
 // ./index.js
 //---------------------------------------------------------
-const keys = require('./config/keys');
+const keys = require("./config/keys");
 
 passport.use(
   new GoogleStrategy(
@@ -133,12 +137,14 @@ First, we need to create a route handler to make sure that the user get kicked i
 //---------------------------------------------------------
 app.get(
   "/auth/google",
-  passport.authenticate('google', {
-    scope: ['profile', 'email'] // What access we want to have
+  passport.authenticate("google", {
+    scope: ["profile", "email"] // What access we want to have
   })
 );
 ```
+
 If we try to enter `'http://localhost:5000/auth/google'` in our browser, we'll get an error: `redirect_uri_mismatch`. The url for this error is:
+
 ```
 https://accounts.google.com/o/oauth2/v2/auth?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fauth%2Fgoogle%2Fcallback&scope=profile%20email&client_id=900103340416-ncphrm92c4m8taktob1nm9vhj0lmspso.apps.googleusercontent.com
 ```
@@ -150,13 +156,11 @@ We can see from the url that the user should be redirected to `http://localhost:
 Now if we enter the url `http://localhost:5000/auth/google`, we can see the page to grant permission.
 
 A handler for callback uri is needed:
+
 ```javascript
 // ./index.js
 //---------------------------------------------------------
-app.get(
-  "/auth/google/callback",
-  passport.authenticate('google')
-);
+app.get("/auth/google/callback", passport.authenticate("google"));
 ```
 
 ---
@@ -176,9 +180,9 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log('access token', accessToken);
-      console.log('refresh token', refreshToken);
-      console.log('profile', profile);
+      console.log("access token", accessToken);
+      console.log("refresh token", refreshToken);
+      console.log("profile", profile);
     }
   )
 );
@@ -187,11 +191,11 @@ passport.use(
 If we run `npm start` this time, we can see some data in our terminal:
 
 ```javascript
-access token ya29.Glu3BH61CPKSX1hcp6bFsIoKY3gIvbwpka9Cj6deqoVwaiYyg2jBJsR5lbqUUVwhtBG5_zILiLdVXHfGYudGGhWtmPEs8p_XCKz13Yv6R2KTjiS8TUwmu66HYLJt
+access token <some-token>
 refresh token undefined
-profile { id: '101194515811903038601',
-  displayName: 'Liyu Qin',
-  name: { familyName: 'Qin', givenName: 'Liyu' },
+profile { id: '<some-id>',
+  displayName: 'Some Name',
+  name: { familyName: 'Name', givenName: 'Some' },
   emails: [ { value: 'qinliyu1990@gmail.com', type: 'account' } ],
   photos: [ { value: 'https://lh5.googleusercontent.com/-9lr1Fh-bgK8/AAAAAAAAAAI/AAAAAAAAAR4/vE7A2w5BwH4/photo.jpg?sz=50' } ],
   gender: 'male',
@@ -210,6 +214,7 @@ npm install --save nodemon
 ```
 
 Create a new script in our `'./package.json'`:
+
 ```javascript
 // ./package.json
 //---------------------------------------------------------
@@ -252,9 +257,9 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log('access token', accessToken);
-      console.log('refresh token', refreshToken);
-      console.log('profile', profile);
+      console.log("access token", accessToken);
+      console.log("refresh token", refreshToken);
+      console.log("profile", profile);
     }
   )
 );
@@ -263,24 +268,18 @@ passport.use(
 // Route Handler
 //-------------------------------------------------------------------
 // Homepage
-app.get(
-  "/",
-  (req, res) => {
-    res.send({ hi: 'there' });
-  }
-);
+app.get("/", (req, res) => {
+  res.send({ hi: "there" });
+});
 // Google OAuth
 app.get(
   "/auth/google",
-  passport.authenticate('google', {
-    scope: ['profile', 'email']
+  passport.authenticate("google", {
+    scope: ["profile", "email"]
   })
 );
 // Callback
-app.get(
-  "/auth/google/callback",
-  passport.authenticate('google')
-);
+app.get("/auth/google/callback", passport.authenticate("google"));
 
 //-------------------------------------------------------------------
 // Listen to Port
