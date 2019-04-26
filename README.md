@@ -8,8 +8,6 @@ This is a feedback collection application for product owners. You can use this a
 
 ## User Flow
 
-Here is the app user flow:
-
 1. User signs up via Google OAuth
 2. User pays for email credits via Stripe
 3. User creates a new 'campaign'
