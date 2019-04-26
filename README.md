@@ -126,8 +126,8 @@ The detailed list of development notes can be viewed [here](./notes).
 1. Fetching a List of Surveys
 2. Displaying Surveys in the Front End
 
-### Acknowledgement
+### Acknowledgements
 
 Thanks to [@StephenGrider](https://github.com/StephenGrider) for this awesome dive into Node, Express, Redux and React.
 
-And a special thanks to [@qqqlllyyyy](https://github.com/qqqlllyyyy) for the awesome notes!
+And a special thanks to [@qqqlllyyyy](https://github.com/qqqlllyyyy) for the comprehensive notes!
