@@ -4,7 +4,7 @@ A full stack project with React and Node.
 
 ## App Overview
 
-This is a feedback collection application for product owners. You can use this application to send emails requesting feedback and get tabulation of results.
+This is a feedback collection application for product owners. You can use this application to send emails requesting feedback and get a tabulation of results.
 
 ## User Flow
 
